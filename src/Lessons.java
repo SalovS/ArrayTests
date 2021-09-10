@@ -9,15 +9,17 @@ public class Lessons {
 
     public void lesson1() {
         String[] words = new String[]{"Каждый", "охотник", "желает", "знать,", "где", "сидит", "фазан."};
-        String[] newArrayWords = new String[words.length];
-        for (int i = 0; i < words.length; i++) {
-            newArrayWords[words.length - i - 1] = words[i];
+        printArray(words);
+        String word;
+        for (int i = 0; i < words.length / 2; i++) {
+            word = words[i];
+            words[i] = words[words.length - 1 - i];
+            words[words.length - 1 - i] = word;
         }
         printArray(words);
-        printArray(newArrayWords);
     }
 
-    public void printArray(String[] arr){
+    private void printArray(String[] arr){
         for(int i = 0; i < arr.length; i++)
             System.out.print(arr[i] + " ");
         System.out.println();
@@ -28,13 +30,12 @@ public class Lessons {
         final float MIN_TEMP = 32;
         final float MAX_TEMP = 40;
         float[] temperature = getTemperature(NUM_PATIENTS, MIN_TEMP, MAX_TEMP);
-        System.out.println("Температуры пациентов: ");
         printTemperature(temperature);
         System.out.printf("\nСредняя температура: %.2f\n",getAverageTemperature(temperature));
         System.out.printf("Количество здоровых: %d\n",getNumerOfHealthy(temperature));
     }
 
-    public float[] getTemperature(int numb, float minT, float maxT){
+    private float[] getTemperature(int numb, float minT, float maxT){
         float[] temperature = new float[numb];
         Random random = new Random();
         for(int i = 0; i < numb; i++){
@@ -43,7 +44,7 @@ public class Lessons {
         return temperature;
     }
 
-    public float getAverageTemperature(float[] temperature){
+    private float getAverageTemperature(float[] temperature){
         double sumTemperature = 0;
         for(int i = 0; i < temperature.length; i++){
             sumTemperature += temperature[i];
@@ -51,7 +52,7 @@ public class Lessons {
         return (float)(sumTemperature / temperature.length);
     }
 
-    public int getNumerOfHealthy(float[] temperature){
+    private int getNumerOfHealthy(float[] temperature){
         int healthyPeople = 0;
         for(int i = 0; i < temperature.length; i++){
             if(temperature[i] > 36.5 && temperature[i] < 36.7)
@@ -60,13 +61,14 @@ public class Lessons {
         return healthyPeople;
     }
 
-    public void printTemperature(float[] temperature){
+    private void printTemperature(float[] temperature){
+        System.out.println("Температуры пациентов: ");
         for(int i = 0; i < temperature.length; i++){
             System.out.printf("%.1f ", temperature[i]);
         }
     }
 
-    private void additionalLesson() {
+    public void additionalLesson() {
         final int side = 7;
         String[][] figur = new String[side][side];
         for(int i = 0; i < side; i++){
